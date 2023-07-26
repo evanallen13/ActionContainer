@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 jobs:
-  echoHelo:
+  build-docker:
     runs-on: ubuntu-latest
     steps:
       
@@ -28,3 +28,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:latest
 
+  run-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name run: 
+        run: docker run evanallen13/helloworld:latest
