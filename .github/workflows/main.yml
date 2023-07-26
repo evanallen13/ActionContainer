@@ -31,5 +31,5 @@ jobs:
   run-docker:
     runs-on: ubuntu-latest
     steps:
-      - name run: 
+      - name: 
         run: docker run evanallen13/helloworld:latest
