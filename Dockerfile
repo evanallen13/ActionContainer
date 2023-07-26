@@ -1,3 +1,2 @@
 FROM alpine
-
-CMD ["echo", "lets test this"]
+CMD ["echo", "lets test"]
