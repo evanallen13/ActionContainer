@@ -4,6 +4,8 @@ on:
   push:
     branches: [ "main" ]
 
+    tags: [ 'v*.*.*' ]
+
   workflow_dispatch:
 
 jobs:
@@ -29,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ github.sha }}
 
   run-docker:
     runs-on: ubuntu-latest
@@ -37,4 +39,4 @@ jobs:
     steps:
 
       - name: 
-        run: docker run evanallen13/helloworld:latest
+        run: docker run evanallen13/helloworld:${{ github.sha }}
