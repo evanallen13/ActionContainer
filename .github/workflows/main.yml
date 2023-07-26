@@ -1,0 +1,15 @@
+# action.yml
+name: 'Hello World'
+on: 
+  workflow_dispatch
+
+jobs:
+  echoHelo:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Get the output time
+        run: echo "Hello World"
