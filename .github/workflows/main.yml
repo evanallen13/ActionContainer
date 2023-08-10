@@ -4,7 +4,6 @@ on:
   push:
     branches: [ "main" ]
 
-    tags: [ 'v*.*.*' ]
 
   workflow_dispatch:
 
@@ -33,14 +32,14 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ github.sha }}
           
-      - uses: actions/checkout@v1
-      - name: Run a one-line script
-        run: echo "Hello World" >> ./.github/workflows/say_hello.txt
+      - name: Print GitHub event action
+        run: |
+          echo "${{ github.event.action }}"
 
-#   run-docker:
-#     runs-on: ubuntu-latest
-#     needs: build-docker
-#     steps:
+  run-docker:
+    runs-on: ubuntu-latest
+    needs: build-docker
+    steps:
 
-#       - name: 
-#         run: docker run evanallen13/helloworld:${{ github.sha }}
+      - name: 
+        run: docker run evanallen13/helloworld:${{ github.sha }}
