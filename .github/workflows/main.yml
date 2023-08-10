@@ -35,7 +35,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ github.sha }}
       
       - name: "Test to display example_value environment variable" 
-          run: echo "$TAG"
+        run: echo "$TAG"
 
       - name: Triggered by workflow_dispatch
         if: github.event_name == 'workflow_dispatch'
