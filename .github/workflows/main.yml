@@ -40,6 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-docker
     steps:
+<<<<<<< HEAD
 
       - name: 
+=======
+      - name: Run Docker
+>>>>>>> 524de53ba144a71cf60d0cfaab69e00097d0e117
         run: docker run evanallen13/helloworld:${{ github.sha }}
