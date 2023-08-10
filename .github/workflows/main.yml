@@ -32,9 +32,9 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ github.sha }}
           
-      - name: Print GitHub event action
-        run: |
-          echo "${{ github.event }}"
+      - name: Echo "hello" if triggered by workflow_dispatch
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "hello"
 
   run-docker:
     runs-on: ubuntu-latest
