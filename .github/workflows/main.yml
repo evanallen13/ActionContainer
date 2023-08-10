@@ -34,7 +34,7 @@ jobs:
           
       - name: Print GitHub event action
         run: |
-          echo "${{ github.event.action }}"
+          echo "${{ github.event }}"
 
   run-docker:
     runs-on: ubuntu-latest
