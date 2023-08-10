@@ -37,7 +37,14 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}
-      
+
+  somthing-else:
+    runs-on: ubuntu-latest
+    needs: build-docker
+    steps:
+      - name: Say Hello
+        run: echo "hello world"
+
   run-docker:
     runs-on: ubuntu-latest
     needs: build-docker
