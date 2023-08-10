@@ -32,7 +32,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:$TAG
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{env.TAG}}
       
       - name: "Test to display example_value environment variable" 
         run: echo "$TAG"
