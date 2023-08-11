@@ -38,4 +38,4 @@ jobs:
     needs: build-docker
     steps:
       - name: Run Docker
-        run: docker run evanallen13/helloworld:${{ env.TAG }}
+        run: docker run -e MY_VARIABLE="hello world" evanallen13/helloworld:${{ env.TAG }}
