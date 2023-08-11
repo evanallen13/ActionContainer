@@ -4,9 +4,14 @@ on:
   #   branches: [ "main" ]
 
   workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message to print'
+        default: 'Hello World'
 
 env:
   TAG: ${{ github.run_id }}
+  MESSAGE: ${{ github.event.inputs.message }}
 
 jobs:
   build-docker:
