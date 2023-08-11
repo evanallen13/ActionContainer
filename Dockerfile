@@ -4,6 +4,8 @@ FROM ubuntu
 
 COPY . .
 
+RUN chmod a+x SayHello.sh
+
 
 # ENTRYPOINT ["./SayHello.sh", $NAME]
 
