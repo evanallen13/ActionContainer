@@ -45,4 +45,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="hello world" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}
