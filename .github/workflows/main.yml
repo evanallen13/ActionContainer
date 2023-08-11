@@ -11,7 +11,8 @@ on:
 
 env:
   TAG: ${{ github.run_id }}
-  MESSAGE: ${{ github.event.inputs.message }}
+  MESSAGE: ${{ vars.message }}
+  ##${{ github.event.inputs.message }}
 
 jobs:
   build-docker:
