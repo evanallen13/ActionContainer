@@ -48,14 +48,13 @@ jobs:
           echo "Hello World" > hello.txt
           cat hello.txt
 
-      - name: Commit log
-        run: |
-            git config --global user.name 'evanallen13'
-            git config --global user.email 'evanallen13@gmail.com'
-            git add -A
-            git checkout master
-            git diff-index --quiet HEAD || git commit -am "deploy workflow logs"
-            git push
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Your Name
+          author_email: evanallen13@gmail.com
+          message: 'Your commit message'
+          add: '*.js'
 
       # - name: Upload file
       #   uses: actions/upload-artifact@v2
