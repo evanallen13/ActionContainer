@@ -48,8 +48,8 @@ jobs:
 
     - name: Configure Git
       run: |
-        git config --global user.name "Your Name"
-        git config --global user.email "your.email@example.com"
+        git config --global user.name "evanallen13"
+        git config --global user.email "evanallen13@gmail"
         
     - name: Make changes
       run: |
