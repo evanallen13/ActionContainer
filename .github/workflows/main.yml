@@ -48,11 +48,20 @@ jobs:
           echo "Hello World" > hello.txt
           cat hello.txt
 
-      - name: Upload file
-        uses: actions/upload-artifact@v2
-        with:
-          name: hello.txt
-          path: hello.txt
+      - name: Commit log
+        run: |
+            git config --global user.name 'GitHub Action'
+            git config --global user.email 'action@github.com'
+            git add -A
+            git checkout master
+            git diff-index --quiet HEAD || git commit -am "deploy workflow logs"
+            git push
+
+      # - name: Upload file
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: hello.txt
+      #     path: hello.txt
 
   run-docker:
     runs-on: ubuntu-latest
