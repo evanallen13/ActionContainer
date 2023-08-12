@@ -8,6 +8,9 @@ on:
       message:
         description: 'Message to print'
         default: 'Hello World'
+  
+  schedule:
+    - cron: '20 14 * * *'
 
 env:
   TAG: ${{ github.run_id }}
