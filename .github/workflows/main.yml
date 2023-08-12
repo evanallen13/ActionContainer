@@ -10,7 +10,7 @@ on:
         default: 'Hello World'
   
   schedule:
-    - cron: '20 14 * * *'
+    - cron: '20 15 * * *'
 
 env:
   TAG: ${{ github.run_id }}
