@@ -15,6 +15,7 @@ on:
 env:
   TAG: ${{ github.run_id }}
   MESSAGE: ${{ vars.message }}
+  ACTION: ${{ github.event_name }}
   ##${{ github.event.inputs.message }}
 
 jobs:
@@ -27,22 +28,26 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
-
-    - name: Configure Git
+    
+    - name: Echo message
       run: |
-        git config --global user.name "evanallen13"
-        git config --global user.email "evanallen13@gmail"
+        echo "Message: ${{ env.ACTION }}"
+
+    # - name: Configure Git
+    #   run: |
+    #     git config --global user.name "evanallen13"
+    #     git config --global user.email "evanallen13@gmail"
         
-    - name: Make changes
-      run: |
-        git pull origin main
-        echo "Updated content" >> myfile.txt
-        git add myfile.txt
-        git commit -m "Auto commit: Updated myfile.txt"
+    # - name: Make changes
+    #   run: |
+    #     git pull origin main
+    #     echo "Updated content" >> myfile.txt
+    #     git add myfile.txt
+    #     git commit -m "Auto commit: Updated myfile.txt"
 
-    - name: Push changes
-      run: |
-        git push origin main
+    # - name: Push changes
+    #   run: |
+    #     git push origin main
 
   # build-docker:
   #   runs-on: ubuntu-latest
