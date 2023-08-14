@@ -29,7 +29,8 @@ jobs:
     
     - name: Echo message
       run: |
-        ./SayHello.sh
+        chmod +x ./SayHello.sh
+        ./SayHello.sh "Hello World!"
 
     # - name: Configure Git
     #   run: |
