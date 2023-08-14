@@ -54,7 +54,7 @@ jobs:
     #     git push origin main
 
   build-docker:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.RunDocker
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.RunDocker == 'true'
     runs-on: ubuntu-latest
     steps:
       
