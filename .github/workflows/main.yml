@@ -31,16 +31,17 @@ jobs:
       run: |
         chmod +x ./SayHello.sh
         ./SayHello.sh "Hello World!"
+            
+    outputs:
+      someMessage: "Some Message!!"
 
-    - name: Set env
-      run: echo "MESSAGE=$(echo "something else" | cut -c 1-6)" >> $GITHUB_ENV
   
   print-message: 
     runs-on: ubuntu-latest
     needs: [ create-file]
     steps:
       - name: Set env
-        run: echo ${{ env.MESSAGE }}
+        run: echo ${{ needs.create-file.outputs.someMessage}}
 
 
     # - name: Configure Git
