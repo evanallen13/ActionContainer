@@ -24,13 +24,22 @@ jobs:
     #   contents: write
     
     steps:
-    - name: Check out code
-      uses: actions/checkout@v3
+
+    - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
+        enable-AzPSSession: true
+
+    # - name: Check out code
+    #   uses: actions/checkout@v3
     
-    - name: Echo message
-      run: |
-        chmod +x ./SayHello.sh
-        ./SayHello.sh "Hello World!"
+    # - name: Echo message
+    #   run: |
+    #     chmod +x ./SayHello.sh
+    #     ./SayHello.sh "Hello World!"
 
     # - name: Configure Git
     #   run: |
