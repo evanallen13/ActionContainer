@@ -23,8 +23,8 @@ jobs:
 
   create-file: 
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    # permissions:
+    #   contents: write
     
     steps:
     - name: Check out code
@@ -39,7 +39,7 @@ jobs:
     #     git config --global user.name "evanallen13"
     #     git config --global user.email "evanallen13@gmail"
         
-    # - name: Make changes
+    # - name: Make changes  
     #   run: |
     #     git pull origin main
     #     echo "Updated content" >> myfile.txt
