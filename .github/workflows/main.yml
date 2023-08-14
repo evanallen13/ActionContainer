@@ -13,9 +13,6 @@ on:
           type: boolean
           required: false
           default: false
-  
-  schedule:
-    - cron: '0 12 * * *'
 
 env:
   TAG: ${{ github.run_id }}
