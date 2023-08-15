@@ -35,14 +35,12 @@ jobs:
     outputs:
       someMessage: "Some Message!!"
 
-  
   print-message: 
     runs-on: ubuntu-latest
     needs: [ create-file]
     steps:
       - name: Set env
         run: echo ${{ needs.create-file.outputs.someMessage}}
-
 
     # - name: Configure Git
     #   run: |
@@ -87,7 +85,7 @@ jobs:
 
   run-docker:
     runs-on: ubuntu-latest
-    needs: [ build-docker, create-file]
+    needs: [ build-docker, print-message]
     steps:
 
       - name: Login to Docker Hub
