@@ -31,16 +31,6 @@ jobs:
       run: |
         chmod +x ./SayHello.sh
         ./SayHello.sh "Hello World!"
-
-    - name: Echo message
-      run: |
-        chmod +x ./myfile.txt
-        echo "Hello World!" >> myfile.txt
-    
-    - uses: actions/upload-artifact@v3
-      with:
-        name: my-artifact
-        path: ./myfile.txt
             
     outputs:
       someMessage: "Some Message!!"
