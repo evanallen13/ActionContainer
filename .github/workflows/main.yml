@@ -31,8 +31,11 @@ jobs:
       run: |
         chmod +x ./SayHello.sh
         ./SayHello.sh "Hello World!"
-
-    - run: echo hello > /world.txt
+    
+    - run: |
+        touch world.txt
+        chmod a+x world.txt
+        echo hello > /world.txt
 
     - uses: actions/upload-artifact@v3
       with:
