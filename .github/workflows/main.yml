@@ -32,15 +32,10 @@ jobs:
         chmod +x ./SayHello.sh
         ./SayHello.sh "Hello World!"
     
-    - run: |
-        touch world.txt
-        chmod a+x world.txt
-        echo hello > /world.txt
-
     - uses: actions/upload-artifact@v3
       with:
         name: my-artifact
-        path: /world.txt
+        path: ./myfile.txt
             
     outputs:
       someMessage: "Some Message!!"
