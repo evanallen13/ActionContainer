@@ -29,7 +29,7 @@ jobs:
 
       - name: CURL
         run: |
-          hostname --ip-address
+          curl http://localhost:8200
 
   create-file: 
     runs-on: ubuntu-latest
