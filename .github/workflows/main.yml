@@ -18,6 +18,18 @@ env:
 
 jobs:
 
+  docker-curl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: RUN DOCKER
+        run: |
+          docker run -dp 80:80 nginx
+
+      - name: CURL
+        run: |
+          curl http://localhost:80
+
   create-file: 
     runs-on: ubuntu-latest
     # permissions:
