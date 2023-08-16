@@ -25,10 +25,6 @@ jobs:
       - name: RUN DOCKER
         run: |
           docker run -dp 8200:80 evanallen13/machinename
-          docker ps -a
-
-      - name: CURL
-        run: |
           curl http://localhost:8200
 
   create-file: 
