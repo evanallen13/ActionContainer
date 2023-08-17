@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: RUN DOCKER
         run: |
-          docker run -dp 80:80 nginx
+          docker run -dp 80:80 nginx:latest
 
   create-file: 
     runs-on: ubuntu-latest
