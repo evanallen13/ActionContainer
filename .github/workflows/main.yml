@@ -24,7 +24,12 @@ jobs:
     steps:
       - name: RUN DOCKER
         run: |
-          docker run -dp 80:80 nginx
+          docker run -dp 80:80 nginx:latest
+          docker ps -a
+
+      - name: CURL
+        run: |
+          curl http://localhost:80
 
   create-file: 
     runs-on: ubuntu-latest
