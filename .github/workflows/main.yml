@@ -25,6 +25,7 @@ jobs:
       - name: RUN DOCKER
         run: |
           docker run -dp 80:80 nginx:latest
+          docker ls
 
   create-file: 
     runs-on: ubuntu-latest
