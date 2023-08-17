@@ -24,8 +24,8 @@ jobs:
     steps:
       - name: RUN DOCKER
         run: |
-          docker run -dp 8200:80 evanallen13/machinename
-          curl http://localhost:8200
+          docker run -dp 80:80 nginx
+          curl http://localhost:80
 
   create-file: 
     runs-on: ubuntu-latest
