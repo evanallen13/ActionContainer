@@ -46,7 +46,9 @@ jobs:
             }
           }'
           
-          echo $QUERY
+      - name: Set Output
+        run: |
+          echo "Total Count: ${{ steps.get_runs.outputs.totalCount }}"
         
           
 
