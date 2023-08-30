@@ -34,7 +34,7 @@ jobs:
       - name: Get Workflow Runs
         id: get_runs
         run: |
-          TOKEN="$GITHUB_TOKEN"
+          TOKEN="${{ secrets.PAT_TOKEN }}"
           WORKFLOW_NAME="Your Workflow Name"  # Replace with your actual workflow name
           DATE=$(date +"%Y-%m-%d")
 
