@@ -35,7 +35,7 @@ jobs:
     needs: [ build ]
     steps:
       - name: Display updated version
-        run: echo "Updated version is ${{ vars.version }}"
+        run: echo ${{vars.REPOSITORY_VAR.version}}
 
 
   # docker-curl:
