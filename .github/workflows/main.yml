@@ -25,21 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Remove README.md
-        run: rm README.md
-
-      - name: ls
-        run: ls -la
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.2.0
   
-  read-readme:
-    runs-on: ubuntu-latest
-    needs: [ rm-readme ]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
 
-      - name: Read README.md
-        run: ls -la
   # docker-curl:
   #   runs-on: ubuntu-latest
 
