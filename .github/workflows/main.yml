@@ -32,7 +32,8 @@ jobs:
     needs: [ print-version ]
     steps:
       - name: Set env
-        run: echo "VERSION=5" >> $GIT_VAR
+        run: |
+          echo "VERSION=5" >> $GITHUB_ENV
 
 
   # docker-curl:
