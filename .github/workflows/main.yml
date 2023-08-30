@@ -38,15 +38,17 @@ jobs:
           WORKFLOW_NAME='Hello World'
           DATE=$(date +"%Y-%m-%d")
 
-          URL="https://api.github.com/repos/${{ github.repository }}/actions/workflows/${WORKFLOW_NAME}/runs?status=completed&event=workflow_run"
-
-          RESPONSE=$(curl -s -H "Authorization: Bearer $TOKEN" "$URL")
-          COUNT=$(echo "$RESPONSE" | jq ".workflow_runs | map(select(.created_at | startswith(\"$DATE\"))) | length")
-
-          echo "::set-output name=count::$COUNT"
-
-      - name: Output Run Count
-        run: echo "Workflow ran ${{ steps.get_runs.outputs.count }} times today."
+          QUERY='query($owner: String!, $repo: String!, $workflowName: String!, $date: DateTime!) {
+            repository(owner: $owner, name: $repo) {
+              workflowRuns(first: 100, workflowName: $workflowName, createdAfter: $date) {
+                totalCount
+              }
+            }
+          }'
+          
+          echo $Query
+        
+          
 
   # docker-curl:
   #   runs-on: ubuntu-latest
