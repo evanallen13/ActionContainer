@@ -32,7 +32,7 @@ jobs:
       - name: Set env
         run: |
           current_version_int=$((env.VERSION))
-          echo current_version_int
+          echo $current_version_int
 
   # docker-curl:
   #   runs-on: ubuntu-latest
