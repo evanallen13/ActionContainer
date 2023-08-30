@@ -26,7 +26,7 @@ jobs:
       id: buildnumber
       uses: einaregilsson/build-number@v3 
       with:
-        token: ${{secrets.PAT_TOKEN}}        
+        token: ${{secrets.github_token}}        
     
     # Now you can pass ${{ steps.buildnumber.outputs.build_number }} to the next steps.
     - name: Another step as an example
