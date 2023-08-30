@@ -19,18 +19,35 @@ env:
 
 jobs:
 
-  print-version:
+  increment_version:
     runs-on: ubuntu-latest
-    steps:
-      - name: Set env
-        run: echo "The version is ${{ env.VERSION }}"
 
-  update-version:
-    runs-on: ubuntu-latest
-    needs: [ print-version ]
     steps:
-      - name: Set env
-        run: echo "VERSION=(${{ env.VERSION }} + 1)"" >> >> $GITHUB_Vars
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up environment
+        run: |
+          # Load the existing version from action context
+          current_version=$VERSION
+          
+          # Convert the version to an integer for incrementing
+          current_version_int=$((current_version))
+
+          # Increment the version by 1
+          new_version_int=$((current_version_int + 1))
+          
+          # Convert the new version back to string form
+          new_version=$new_version_int
+          
+          # Set the new version as an output
+          echo "::set-output name=new_version::$new_version"
+
+      - name: Use the new version in downstream steps
+        run: |
+          # You can access the new version using ${{ steps.increment_version.outputs.new_version }}
+          new_version=${{ steps.increment_version.outputs.new_version }}
+          echo "New version: $new_version"
 
   # docker-curl:
   #   runs-on: ubuntu-latest
