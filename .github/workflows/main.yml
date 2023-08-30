@@ -30,7 +30,7 @@ jobs:
     needs: [ print-version ]
     steps:
       - name: Set env
-        run: echo "version=(${{ env.VERSION }} + 1)" >> $GITHUB_Vars
+        run: echo "version=(${{ env.VERSION }} + 1)"
 
   # docker-curl:
   #   runs-on: ubuntu-latest
