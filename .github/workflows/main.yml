@@ -19,22 +19,36 @@ env:
 
 jobs:
 
-  print-version:
+  count_runs:
     runs-on: ubuntu-latest
-    steps:
-      - name: Set env
-        run: echo "The version is ${{ env.VERSION }}"
 
-  update-version:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    needs: [ print-version ]
     steps:
-      - name: Set env
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Get Workflow Runs
+        id: get_runs
         run: |
-          echo "VERSION=5" >> $GITHUB_ENV
+          TOKEN="$GITHUB_TOKEN"
+          WORKFLOW_NAME="Your Workflow Name"  # Replace with your actual workflow name
+          DATE=$(date +"%Y-%m-%d")
 
+          URL="https://api.github.com/repos/${{ github.repository }}/actions/workflows/${WORKFLOW_NAME}/runs?status=completed&event=workflow_run"
+
+          RESPONSE=$(curl -s -H "Authorization: Bearer $TOKEN" "$URL")
+          COUNT=$(echo "$RESPONSE" | jq ".workflow_runs | map(select(.created_at | startswith(\"$DATE\"))) | length")
+
+          echo "::set-output name=count::$COUNT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
+      - name: Output Run Count
+        run: echo "Workflow ran ${{ steps.get_runs.outputs.count }} times today."
 
   # docker-curl:
   #   runs-on: ubuntu-latest
