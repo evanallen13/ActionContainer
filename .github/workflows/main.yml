@@ -23,32 +23,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: einaregilsson/build-number@v1
         with:
-          python-version: 3.x
-
-      - name: Get Workflow Runs
-        id: get_runs
-        run: |
-          TOKEN="${{ secrets.PAT_TOKEN }}"
-          WORKFLOW_NAME='Hello World'
-          DATE=$(date +"%Y-%m-%d")
-
-          QUERY='query($owner: String!, $repo: String!, $workflowName: String!, $date: DateTime!) {
-            repository(owner: $owner, name: $repo) {
-              workflowRuns(first: 100, workflowName: $workflowName, createdAfter: $date) {
-                totalCount
-              }
-            }
-          }'
-          
-      - name: Set Output
-        run: |
-          echo "Total Count: ${{ steps.get_runs.outputs.totalCount }}"
+          token: ${{secrets.PAT_TOKEN}}
         
           
 
