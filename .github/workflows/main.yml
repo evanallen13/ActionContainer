@@ -44,8 +44,6 @@ jobs:
           COUNT=$(echo "$RESPONSE" | jq ".workflow_runs | map(select(.created_at | startswith(\"$DATE\"))) | length")
 
           echo "::set-output name=count::$COUNT"
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
       - name: Output Run Count
         run: echo "Workflow ran ${{ steps.get_runs.outputs.count }} times today."
