@@ -35,7 +35,7 @@ jobs:
         id: get_runs
         run: |
           TOKEN="${{ secrets.PAT_TOKEN }}"
-          WORKFLOW_NAME="Your Workflow Name"  # Replace with your actual workflow name
+          WORKFLOW_NAME='Hello World'
           DATE=$(date +"%Y-%m-%d")
 
           URL="https://api.github.com/repos/${{ github.repository }}/actions/workflows/${WORKFLOW_NAME}/runs?status=completed&event=workflow_run"
