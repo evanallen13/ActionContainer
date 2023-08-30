@@ -19,14 +19,20 @@ env:
 
 jobs:
 
-  count_runs:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: einaregilsson/build-number@v1
-        with:
-          token: ${{secrets.PAT_TOKEN}}
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v3 
+      with:
+        token: ${{secrets.PAT_TOKEN}}        
+    
+    # Now you can pass ${{ steps.buildnumber.outputs.build_number }} to the next steps.
+    - name: Another step as an example
+      uses: actions/hello-world-docker-action@v1
+      with:
+        who-to-greet: ${{ steps.buildnumber.outputs.build_number }}
         
           
 
