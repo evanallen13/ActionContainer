@@ -32,9 +32,8 @@ jobs:
     needs: [ print-version ]
     steps:
       - name: Set env
-        run: |
-          current_version_int=$((env.VERSION))
-          echo ${{ current_version_int }}
+        run: echo "VERSION=5" >> $GIT_VAR
+
 
   # docker-curl:
   #   runs-on: ubuntu-latest
