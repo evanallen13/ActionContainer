@@ -27,9 +27,13 @@ jobs:
 
       - name: Update version
         run: echo "VERSION=$((VERSION + 1))" >> $GITHUB_ENV
-      
+
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
       - name: Display updated version
         run: echo "Updated version is ${{ env.VERSION }}"
+
 
 
   # docker-curl:
