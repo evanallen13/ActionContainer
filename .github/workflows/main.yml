@@ -25,6 +25,12 @@ jobs:
       - name: print version
         run: echo ${{ vars.version }}
 
+      - name: Update version
+        run: echo "VERSION=$((VERSION + 1))" >> $GITHUB_ENV
+      
+      - name: Display updated version
+        run: echo "Updated version is ${{ env.VERSION }}"
+
 
   # docker-curl:
   #   runs-on: ubuntu-latest
