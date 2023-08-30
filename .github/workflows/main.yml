@@ -23,18 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Generate build number
-      id: buildnumber
-      uses: einaregilsson/build-number@v3 
+      uses: onyxmueller/build-tag-number@v1
       with:
         token: ${{secrets.github_token}}        
-    
-    # Now you can pass ${{ steps.buildnumber.outputs.build_number }} to the next steps.
-    - name: Another step as an example
-      uses: actions/hello-world-docker-action@v1
-      with:
-        who-to-greet: ${{ steps.buildnumber.outputs.build_number }}
-        
-          
+    - name: Print new build number
+      run: echo "Build number is $BUILD_NUMBER"
 
   # docker-curl:
   #   runs-on: ubuntu-latest
