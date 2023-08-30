@@ -27,12 +27,14 @@ jobs:
 
   update-version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     needs: [ print-version ]
     steps:
       - name: Set env
         run: |
           current_version_int=$((env.VERSION))
-          echo $current_version_int
+          echo ${{ current_version_int }}
 
   # docker-curl:
   #   runs-on: ubuntu-latest
