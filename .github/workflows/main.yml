@@ -46,7 +46,7 @@ jobs:
             }
           }'
           
-          echo $Query
+          echo $QUERY
         
           
 
