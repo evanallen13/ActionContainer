@@ -27,7 +27,7 @@ jobs:
       
       - name: Get Branch
         run: |
-          echo "Branch: ${{ github.red_name }}"
+          echo "Branch: ${{ github.ref }}"
   
   # docker-curl:
   #   runs-on: ubuntu-latest
