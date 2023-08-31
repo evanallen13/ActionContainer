@@ -39,9 +39,12 @@ jobs:
           name: my-artifact
           path: ./
           retention-days: 5
-
-      - name: LS
-        run: ls -la
+      
+      - name: "Increment Version"
+        uses: action-pack/increment@v2
+        with:
+          name: 'VERSION'
+          token: ${{ secrets.PAT_TOKEN }}
     
   # docker-curl:
   #   runs-on: ubuntu-latest
