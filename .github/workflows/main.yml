@@ -32,14 +32,6 @@ jobs:
           echo "Run Attempt: ${{ github.run_attempt }}"
           echo "Run ID: ${{ github.run_id }}"
       
-     
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path: ./
-          retention-days: 5
-      
       - name: "Increment Version"
         uses: action-pack/increment@v2
         with:
