@@ -28,9 +28,7 @@ jobs:
       - name: Get Branch
         run: |
           echo "Branch: ${{ github.ref }}"
-          echo "Branch: ${{ github.head_ref }}"
-          echo "Branch: ${{ github.base_ref }}"
-          echo "Job Name:  ${{ vars.JOB_NAME }}"
+          echo "Job Name:  ${{  github.job }}"
   
   # docker-curl:
   #   runs-on: ubuntu-latest
