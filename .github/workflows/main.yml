@@ -12,7 +12,7 @@ on:
           default: false
 
 env:
-  TAG: $(date +'%Y-%m-%d')
+  TAG: $(date +'%Y-%m-%d')_${{ github.run_number }}
   MESSAGE: ${{ vars.message }}
   ACTION: ${{ github.event_name }}
   VERSION: ${{ vars.version }}
