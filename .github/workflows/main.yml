@@ -29,7 +29,8 @@ jobs:
         run: |
           echo "Branch: ${{ github.ref }}"
           echo "Job Name: ${{ github.event_name }}"
-          echo "Job Name: ${{ github.event }}"
+          echo "Run Attempt: ${{ github.run_attempt }}"
+          echo "Run ID: ${{ github.run_id }}"
   
   # docker-curl:
   #   runs-on: ubuntu-latest
