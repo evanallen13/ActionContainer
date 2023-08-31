@@ -28,7 +28,7 @@ jobs:
       - name: Get Branch
         run: |
           echo "Branch: ${{ github.ref }}"
-          echo "Job Name:  ${{  github.job }}"
+          echo "Job Name:  ${{  env.GITHUB_ACTION }}"
   
   # docker-curl:
   #   runs-on: ubuntu-latest
