@@ -32,7 +32,7 @@ jobs:
           echo "Job Name: ${{ github.event_name }}"
           echo "Run Attempt: ${{ github.run_attempt }}"
           echo "Run ID: ${{ github.run_id }}"
-          echo "Date: ${{ env.ACTION }}"
+          echo "Date: ${{ env.DATE }}"
       
       - name: "Increment Version"
         uses: action-pack/increment@v2
