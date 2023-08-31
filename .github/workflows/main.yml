@@ -28,7 +28,8 @@ jobs:
       - name: Get Branch
         run: |
           echo "Branch: ${{ github.ref }}"
-          echo "Job Name:  $GITHUB_EVENT_NAME
+          echo "Job Name: ${{ github.event_name }}"
+          echo "Job Name: ${{ github.event }}"
   
   # docker-curl:
   #   runs-on: ubuntu-latest
