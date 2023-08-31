@@ -121,7 +121,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}_${{ env.VERSION}}
 
   run-docker:
     runs-on: ubuntu-latest
@@ -137,6 +137,6 @@ jobs:
       - name: set release date
         run: |
           echo "TAG=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
-          
+
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}_${{ env.VERSION}}
