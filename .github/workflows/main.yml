@@ -12,7 +12,7 @@ on:
           default: false
 
 env:
-  TAG: "$(date +'%Y-%m-%d')_$(vars.version)"
+  TAG: $(date +'%Y-%m-%d')_$(vars.version)
   # TAG: ${{ github.run_number }}
   MESSAGE: ${{ vars.message }}
   ACTION: ${{ github.event_name }}
@@ -34,6 +34,7 @@ jobs:
           echo "Run Attempt: ${{ github.run_attempt }}"
           echo "Run ID: ${{ github.run_id }}"
           echo "Date: ${{ env.DATE }}"
+          echo "Tag: ${{ env.TAG }}"
       
       - name: "Increment Version"
         uses: action-pack/increment@v2
