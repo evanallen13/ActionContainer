@@ -31,6 +31,14 @@ jobs:
           echo "Job Name: ${{ github.event_name }}"
           echo "Run Attempt: ${{ github.run_attempt }}"
           echo "Run ID: ${{ github.run_id }}"
+      
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: README.md
+          retention-days: 5
+      
   
   # docker-curl:
   #   runs-on: ubuntu-latest
