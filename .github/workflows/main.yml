@@ -39,16 +39,12 @@ jobs:
           name: my-artifact
           path: ./
           retention-days: 5
-    
-  download-artifact:
-    runs-on: ubuntu-latest
-    steps:
 
       - name: Download a single artifact
         uses: actions/download-artifact@v3
         with:
           name: my-artifact
-  
+    
   # docker-curl:
   #   runs-on: ubuntu-latest
 
