@@ -40,10 +40,8 @@ jobs:
           path: ./
           retention-days: 5
 
-      - name: Download a single artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: my-artifact/README.md
+      - name: LS
+        run: ls -la
     
   # docker-curl:
   #   runs-on: ubuntu-latest
