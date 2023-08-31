@@ -16,7 +16,7 @@ env:
   MESSAGE: ${{ vars.message }}
   ACTION: ${{ github.event_name }}
   VERSION: ${{ vars.version }}
-  DATE: $(date)
+  DATE: $(date +'%Y-%m-%d')
 
 jobs:
 
