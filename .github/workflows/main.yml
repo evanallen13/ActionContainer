@@ -133,6 +133,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+      
+      - name: set release date
+        run: |
+          echo "TAG=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+          
       - name: Run Docker
         run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ env.TAG }}
