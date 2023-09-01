@@ -52,24 +52,22 @@ jobs:
   set-tag:
     runs-on: ubuntu-latest
     steps:
-
       - name: Set Tag
         id: set_tag
         run: |
-          echo "TAG=$(date --rfc-3339=date)_${{vars.version}}" >> ${GITHUB_ENV}
+          echo "TAG=$(date --rfc-3339=date)_${{ github.run_number }}" >> $GITHUB_ENV
 
     outputs:
-      Tag: ${{ steps.set_tag.outputs.TAG }}
-  
-  echo-tag: 
-    runs-on: ubuntu-latest
-    needs: [ set-tag ]
-    steps:
+      tag: ${{ steps.set_tag.outputs.TAG }}
 
-      - name: echo tag
+  echo-tag:
+    runs-on: ubuntu-latest
+    needs: [set-tag]
+    steps:
+      - name: Echo Tag
         run: |
-          echo "Tag: ${{ needs.set-tag.outputs.Tag }}"
-          echo "Og Tag: ${{ env.TAG }}"
+          echo "Tag: ${{ needs.set-tag.outputs.tag }}"
+          echo "Original Tag: ${{ env.TAG }}"
     
   # docker-curl:
   #   runs-on: ubuntu-latest
