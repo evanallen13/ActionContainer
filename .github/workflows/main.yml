@@ -17,6 +17,7 @@ env:
   ACTION: ${{ github.event_name }}
   VERSION: ${{ vars.version }}
   DATE: $(date +'%Y-%m-%d')
+  TAG_Test: "Test Tag"
 
 jobs:
 
@@ -34,6 +35,9 @@ jobs:
           echo "Run ID: ${{ github.run_id }}"
           echo "Date: ${{ env.DATE }}"
           echo "Tag: ${{ env.TAG }}"
+
+          echo "TAG_Test=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+          echo "TAG_Test='TestTag'" >> ${GITHUB_ENV}
       
       - name: "Increment Version"
         uses: action-pack/increment@v2
