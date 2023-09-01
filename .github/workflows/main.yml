@@ -57,6 +57,10 @@ jobs:
         run: |
           echo "TAG=$(date --rfc-3339=date)_${{ github.run_number }}" >> $GITHUB_ENV
 
+      - name: 
+        run: |
+          echo "TAG: ${{ steps.set_tag.outputs.TAG }}"
+
     outputs:
       tag: ${{ steps.set_tag.outputs.TAG }}
 
