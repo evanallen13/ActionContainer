@@ -1,0 +1,50 @@
+name: 'Make Git Changes'
+on: 
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+env:
+  MESSAGE: ${{ vars.message }}
+
+jobs:
+  create-file: 
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+    
+    - name: Echo message
+      run: |
+        chmod +x ./SayHello.sh
+        ./SayHello.sh "Hello World!"
+            
+    outputs:
+      someMessage: "A Differant Message"
+
+  print-message: 
+    runs-on: ubuntu-latest
+    needs: [ create-file ]
+    steps:
+      - name: Set env
+        run: echo ${{ needs.create-file.outputs.someMessage}}
+
+      - name: Configure Git
+        run: |
+            git config --global user.name "evanallen13" 
+            git config --global user.email "evanallen13@gmail"
+        
+      - name: Make changes  
+        run: |
+            git pull origin main
+            echo "Updated content" >> myfile.txt
+            git add myfile.txt
+            git commit -m "Auto commit: Updated myfile.txt"
+
+      - name: Push changes
+        run: |
+            git push origin main
