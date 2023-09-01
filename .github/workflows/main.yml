@@ -56,10 +56,10 @@ jobs:
       - name: Set Tag
         id: set_tag
         run: |
-          echo "TAG_Test=$(date --rfc-3339=date)_${{vars.version}}" >> ${GITHUB_ENV}
+          echo "TAG=$(date --rfc-3339=date)_${{vars.version}}" >> ${GITHUB_ENV}
 
     outputs:
-      Tag: ${{ steps.set_tag.outputs.TAG_Test }}
+      Tag: ${{ steps.set_tag.outputs.TAG }}
   
   echo-tag: 
     runs-on: ubuntu-latest
