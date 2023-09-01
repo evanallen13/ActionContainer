@@ -37,7 +37,7 @@ jobs:
           echo "Tag: ${{ env.TAG }}"
 
           echo "TAG_Test=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
-          echo "TAG_Test='$TAG_Test TestTag'" >> ${GITHUB_ENV}
+          echo "TAG_Test=$(date --rfc-3339=date)TestTag" >> ${GITHUB_ENV}
 
       - name: echo test tag
         run: |
