@@ -32,7 +32,7 @@ jobs:
         id: set_tag
         run: |
           echo "TAG=${{ env.DATE }}-${{ env.VERSION }}" >> "$GITHUB_OUTPUT"
-          echo $(date +'%Y%m%d%H%M')
+          echo $(date +'%Y-%m-%- d%H:%M')
 
       - name: "Increment Version"
         uses: action-pack/increment@v2
