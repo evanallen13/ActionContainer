@@ -59,7 +59,7 @@ jobs:
 
       - name: 
         run: |
-          echo "TAG: ${{ steps.set_tag.outputs.TAG }}"
+          echo "TAG: ${{ env.TAG }}"
 
     outputs:
       tag: ${{ steps.set_tag.outputs.TAG }}
