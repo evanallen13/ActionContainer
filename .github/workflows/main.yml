@@ -38,6 +38,10 @@ jobs:
 
           echo "TAG_Test=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
           echo "TAG_Test='TestTag'" >> ${GITHUB_ENV}
+
+      - name: echo test tag
+        run: |
+          echo "TAG_Test: ${{ env.TAG_Test }}"
       
       - name: "Increment Version"
         uses: action-pack/increment@v2
