@@ -62,7 +62,7 @@ jobs:
 
   echo-tag:
     runs-on: ubuntu-latest
-    needs: [set-tag]
+    needs: set-tag
     steps:
       - name: Echo Tag
         run: |
