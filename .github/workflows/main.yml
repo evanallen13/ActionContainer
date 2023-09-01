@@ -59,7 +59,7 @@ jobs:
           echo "TAG_Test=$(date --rfc-3339=date)_${{vars.version}}" >> ${GITHUB_ENV}
 
     outputs:
-      Tag: ${{ steps.set_tag.outputs.TAG }}
+      Tag: ${{ steps.set_tag.outputs.TAG_Test }}
   
   echo-tag: 
     runs-on: ubuntu-latest
@@ -69,7 +69,7 @@ jobs:
       - name: echo tag
         run: |
           echo "Tag: ${{ needs.set-tag.outputs.Tag }}"
-          ehco "Og Tag: ${{ env.TAG }}"
+          echo "Og Tag: ${{ env.TAG }}"
     
   # docker-curl:
   #   runs-on: ubuntu-latest
