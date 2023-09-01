@@ -40,7 +40,6 @@ jobs:
         
       - name: Make changes  
         run: |
-            git pull origin main
             echo "Updated content" >> myfile.txt
             git add myfile.txt
             git commit -m "Auto commit: Updated myfile.txt"
