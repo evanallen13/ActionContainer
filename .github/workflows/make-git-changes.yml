@@ -1,7 +1,5 @@
 name: 'Make Git Changes'
 on: 
-  push:
-    branches: [ "main" ]
 
   workflow_dispatch:
 
