@@ -23,9 +23,9 @@ env:
   DATE: $(date +'%Y%m%d')
 
 jobs:
-
   echo-message:
     runs-on: ubuntu-latest
+    environment: main
     steps:
       - name: Echo Message
         run: echo ${{ vars.hello }}
