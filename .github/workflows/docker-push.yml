@@ -23,6 +23,12 @@ env:
   DATE: $(date +'%Y%m%d')
 
 jobs:
+
+  echo-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Message
+        run: echo ${{ vars.hello }}
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
