@@ -35,6 +35,7 @@ jobs:
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
+    environment: ${{ github.ref_name }}
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.set_tag.outputs.TAG }}
