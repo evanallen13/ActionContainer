@@ -31,6 +31,7 @@ jobs:
       - name: Echo Message
         run: |
           echo ${{ vars.hello }}
+          echo ${{ vars.VERSION }}
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
