@@ -21,7 +21,6 @@ on:
 
 env:
   MESSAGE: ${{ vars.message }}
-  VERSION: ${{ vars.version }}
   DATE: $(date +'%Y%m%d')
 
 jobs:
@@ -44,7 +43,7 @@ jobs:
       - name: Set Tag
         id: set_tag
         run: |
-          echo "TAG=${{ env.DATE }}-${{ env.VERSION }}" >> "$GITHUB_OUTPUT"
+          echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
           echo $(date +'%Y-%m-%- d%H:%M')
 
       - name: "Increment Version"
