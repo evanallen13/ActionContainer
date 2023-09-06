@@ -21,7 +21,7 @@ on:
 
 env:
   MESSAGE: ${{ vars.message }}
-  DATE: $(date +'%Y%m%d')
+  DATE: ${{ github.event.repository.updated_at}} #$(date +'%Y%m%d')
 
 jobs:
   echo-message:
@@ -32,12 +32,6 @@ jobs:
         run: |
           echo ${{ vars.hello }}
           echo ${{ vars.VERSION }}
-
-      - name: Label new pull requests
-        uses: Balastrong/ga-label-issue@v1.0.0
-        with: 
-          gh-token: ${{ secrets.PAT_TOKEN }}
-          label: "test"
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
