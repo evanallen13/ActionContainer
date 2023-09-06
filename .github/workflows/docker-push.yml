@@ -85,7 +85,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ needs.set-tag.outputs.tag }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:${{ needs.set-tag.outputs.tag }}
 
       - name: Is Build
         if: github.event.inputs.RunDocker == 'true'
@@ -104,4 +104,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld:${{ needs.set-tag.outputs.tag }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:${{ needs.set-tag.outputs.tag }}
