@@ -35,12 +35,11 @@ env:
 
 jobs:
   echo-message:
+    environment: ${{ github.ref_name }}
     runs-on: ubuntu-latest
     steps:
       - name: Echo Message
         run: |
-          echo ${{ github.head_ref }}
-          echo ${{ github.ref_name }}
           echo ${{ vars.hello }}
   
   set-tag:
