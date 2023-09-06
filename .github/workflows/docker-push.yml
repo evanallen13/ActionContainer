@@ -38,7 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo Message
-        run: echo ${{ vars.hello }}
+        run: |
+          echo ${{ github.head_ref }}
+          echo ${{ github.ref }}
+          echo ${{ vars.hello }}
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
