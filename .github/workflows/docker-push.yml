@@ -7,15 +7,6 @@ on:
     
     inputs:
 
-      Envioronment:
-        description: 'Envioronment'
-        required: true
-        default: 'test'
-        type: choice
-        options:
-        - main
-        - test
-
       BuildDocker:
         description: Build Docker
         type: boolean
