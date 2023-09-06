@@ -36,7 +36,6 @@ env:
 jobs:
   echo-message:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.Envioronment }}
     steps:
       - name: Echo Message
         run: echo ${{ vars.hello }}
