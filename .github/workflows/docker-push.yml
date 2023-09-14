@@ -24,29 +24,6 @@ env:
   DATE: $(date +'%Y%m%d')
 
 jobs:
-  echo-message:
-    environment: ${{ github.ref_name }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Echo Message
-        run: |
-          echo ${{ vars.hello }}
-          echo ${{ vars.VERSION }}
-      
-
-      - uses: octokit/request-action@v2.x
-        id: get_latest_release
-        with:
-          route: GET /repositories/{repoId}/environments/{environmentName}/variables/{name}
-          owner: octokit
-          repoId: ${{ github.repository_id }}
-          environmentName: "main"
-          name: "VERSION"
-  
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - run: "echo latest release: '${{ steps.get_latest_release.outputs.data }}'"
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
@@ -60,15 +37,15 @@ jobs:
         id: set_tag
         run: |
           echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
-          echo $(date +'%Y-%m-%- d%H:%M')
 
-      # - name: "Increment Version"
-      #   uses: action-pack/increment@v2
-      #   with:
-      #     name: '${{ github.ref_name }}_VERSION'
-      #     token: ${{ secrets.PAT_TOKEN }}
+      - name: Increment Environment Variable
+        uses: evanallen13/Increment-Environment-Variable@v1
+        with:
+          Name: "VERSION"
+          EnvironmentName: ${{ github.ref_name }}
+          RepoId: ${{ github.repository_id }}
+          Token: ${{ secrets.PAT_TOKEN }}
       
-
   build-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
     environment: ${{ github.ref_name }}
