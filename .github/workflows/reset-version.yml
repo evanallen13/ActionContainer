@@ -26,6 +26,7 @@ jobs:
         uses: MandalAutomations/Increment-Environment-Variable@v3
         with:
           Name: "VERSION"
+          Value: 1
           EnvironmentName: ${{ matrix.enviornments }}
           RepoId: ${{ github.repository_id }}
           Token: ${{ secrets.PAT_TOKEN }}
