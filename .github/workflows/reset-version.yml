@@ -23,7 +23,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Increment Environment Variable
-        uses: MandalAutomations/Increment-Environment-Variable@v3
+        uses: MandalAutomations/Update-Environment-Variable@v3
         with:
           Name: "VERSION"
           Value: 1
