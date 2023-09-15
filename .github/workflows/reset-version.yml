@@ -15,18 +15,12 @@ jobs:
         enviornments: ["main", "test", "uat"]
 
     steps:
-      - name: "Set Variable"
-        uses: action-pack/set-variable@v1
-        with:
-          name: 'VERSION'
-          value: '1'
-          token: ${{ secrets.PAT_TOKEN }}
-
+      
       - name: Update Environment Variable
         uses: MandalAutomations/Update-Environment-Variable@v6
         with:
-          Name: "VERSIONuriweoieruw"
-          Value: ${{ 244 }}
+          Name: "VERSION"
+          Value: ${{ 1 }}
           EnvironmentName: ${{ matrix.enviornments }}
           RepoId: ${{ github.repository_id }}
           Token: ${{ secrets.PAT_TOKEN }}
