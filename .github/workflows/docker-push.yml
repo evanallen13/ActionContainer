@@ -32,6 +32,9 @@ jobs:
       tag: ${{ steps.set_tag.outputs.TAG }}
     steps:
 
+      - name: echo ref
+        run: echo ${{ github.ref_name }}
+
       - name: Set Tag
         id: set_tag
         run: |
