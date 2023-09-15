@@ -17,7 +17,7 @@ jobs:
     steps:
       
       - name: Update Environment Variable
-        uses: MandalAutomations/Update-Environment-Variable@v6
+        uses: MandalAutomations/Update-Environment-Variable@v1
         with:
           Name: "VERSION"
           Value: ${{ 1 }}
