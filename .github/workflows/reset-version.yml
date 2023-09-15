@@ -25,7 +25,7 @@ jobs:
       - name: Update Environment Variable
         uses: MandalAutomations/Update-Environment-Variable@v6
         with:
-          Name: "VERSION"
+          Name: "VERSIONuriweoieruw"
           Value: ${{ 244 }}
           EnvironmentName: ${{ matrix.enviornments }}
           RepoId: ${{ github.repository_id }}
