@@ -23,9 +23,10 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Update Environment Variable
-        uses: MandalAutomations/Update-Environment-Variable@v5
+        uses: MandalAutomations/Update-Environment-Variable@v6
         with:
           Name: "VERSION"
+          Value: ${{ 244 }}
           EnvironmentName: ${{ matrix.enviornments }}
           RepoId: ${{ github.repository_id }}
           Token: ${{ secrets.PAT_TOKEN }}
