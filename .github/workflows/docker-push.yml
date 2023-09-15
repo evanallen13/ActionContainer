@@ -38,7 +38,7 @@ jobs:
           echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
 
       - name: Increment Environment Variable
-        uses: evanallen13/Increment-Environment-Variable@v1
+        uses: MandalAutomations/Increment-Environment-Variable@v1
         with:
           Name: "VERSION"
           EnvironmentName: ${{ github.ref_name }}
