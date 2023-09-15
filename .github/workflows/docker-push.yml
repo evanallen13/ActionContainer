@@ -20,7 +20,7 @@ on:
 env:
   MESSAGE: ${{ vars.message }}
   DATE: $(date +'%Y%m%d')
-  DOCKER_REPO: helloworld-${{ github.ref_name }}
+  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}
 
 jobs:
   
@@ -31,9 +31,6 @@ jobs:
     outputs:
       tag: ${{ steps.set_tag.outputs.TAG }}
     steps:
-
-      - name: echo ref
-        run: echo ${{ github.ref_name }}
 
       - name: Set Tag
         id: set_tag
@@ -73,7 +70,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+          tags: ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
 
   run-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.RunDocker == 'true' && github.event.inputs.BuildDocker == 'true'
@@ -89,4 +86,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
