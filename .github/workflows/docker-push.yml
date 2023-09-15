@@ -1,7 +1,5 @@
 name: 'Docker Build and Push'
 on: 
-  push:
-    branches: [ "main", "test"]
 
   workflow_dispatch:
     
@@ -22,6 +20,7 @@ on:
 env:
   MESSAGE: ${{ vars.message }}
   DATE: $(date +'%Y%m%d')
+  DOCKER_REPO: helloworld-${{ github.ref_name }}
 
 jobs:
   
@@ -32,6 +31,9 @@ jobs:
     outputs:
       tag: ${{ steps.set_tag.outputs.TAG }}
     steps:
+
+      - name: echo ref
+        run: echo ${{ github.ref_name }}
 
       - name: Set Tag
         id: set_tag
@@ -65,17 +67,13 @@ jobs:
       - name: Set up Docker Build
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push
+      - name: Docker Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:${{ needs.set-tag.outputs.tag }}
-
-      - name: Is Build
-        if: github.event.inputs.RunDocker == 'true'
-        run: echo "Build Docker"
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
 
   run-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.RunDocker == 'true' && github.event.inputs.BuildDocker == 'true'
@@ -91,4 +89,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:${{ needs.set-tag.outputs.tag }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
