@@ -55,7 +55,7 @@ jobs:
       - name: Docker Tag and Push
         run: |
           docker tag helloworld ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
-          docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}-444
+          docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
 
       - name: Increment Environment Variable
         if: success()
