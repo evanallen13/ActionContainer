@@ -20,7 +20,7 @@ on:
 env:
   MESSAGE: ${{ vars.message }}
   DATE: $(date +'%Y%m%d')
-  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:$(date +'%Y%m%d')-${{ vars.version }}
+  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}
 
 jobs:
   
@@ -35,6 +35,9 @@ jobs:
       - name: Set Tag
         id: set_tag
         run: echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
+
+      - name: Echo Name
+        run: echo ${{github.actor}}
       
   build-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
@@ -54,7 +57,7 @@ jobs:
 
       - name: Docker Tag and Push
         run: |
-          docker tag helloworld ${{ env.DOCKER_REPO }}
+          docker tag helloworld ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
           docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
 
       - name: Increment Environment Variable
@@ -77,4 +80,4 @@ jobs:
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ env.DOCKER_REPO }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
