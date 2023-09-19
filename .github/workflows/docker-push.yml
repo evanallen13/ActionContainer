@@ -20,7 +20,7 @@ on:
 env:
   MESSAGE: ${{ vars.message }}
   DATE: $(date +'%Y%m%d')
-  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:$(date +'%Y%m%d')
+  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:$(date +'%Y%m%d')-${{ vars.version }}
 
 jobs:
   
@@ -54,7 +54,7 @@ jobs:
 
       - name: Docker Tag and Push
         run: |
-          docker tag helloworld ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+          docker tag helloworld ${{ env.DOCKER_REPO }}
           docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
 
       - name: Increment Environment Variable
@@ -77,4 +77,4 @@ jobs:
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ env.DOCKER_REPO }}
