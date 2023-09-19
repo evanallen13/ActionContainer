@@ -23,6 +23,22 @@ env:
   DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}
 
 jobs:
+
+  make-artifact: 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - run: mkdir -p path/to/artifact
+      
+      - run: echo hello > path/to/artifact/world.txt
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: ./world.txt
+      
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
@@ -37,7 +53,7 @@ jobs:
         run: echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
 
       - name: Echo Name
-        run: echo ${{github.actor}}
+        run: echo ${{ github.actor }}
       
   build-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
