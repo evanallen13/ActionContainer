@@ -37,10 +37,6 @@ jobs:
         run: |
           echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
 
-      - name: Get Tag
-        run: |
-          echo ${{ steps.set_tag.outputs.TAG }}
-
       - name: Increment Environment Variable
         uses: MandalAutomations/Increment-Environment-Variable@v1
         with:
@@ -65,9 +61,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker Build and Push
+      - name: Docker Build
+        run: docker build -t helloworld .
+
+      - name: Docker Tag and Push
         run: |
-          docker build -t helloworld .
           docker tag helloworld ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
           docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
 
@@ -78,11 +76,14 @@ jobs:
     needs: [ set-tag, build-docker ]
     steps:
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Login
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
         run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
