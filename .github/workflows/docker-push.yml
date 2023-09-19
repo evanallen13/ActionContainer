@@ -64,23 +64,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      - name: Set up Docker Build
-        uses: docker/setup-buildx-action@v2
 
-      - name: Build Docker
+      - name: Docker Build and Push
         run: |
           docker build -t helloworld .
-          docker tag helloworld ${{env.DOCKER_REPO}}:${{ needs.set-tag.outputs.tag }}
-          docker push ${{env.DOCKER_REPO}}:${{ needs.set-tag.outputs.tag }}
-
-      # - name: Docker Build and push
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: .
-      #     file: ./Dockerfile
-      #     push: true
-      #     tags: ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+          docker tag helloworld ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+          docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
 
   run-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.RunDocker == 'true' && github.event.inputs.BuildDocker == 'true'
