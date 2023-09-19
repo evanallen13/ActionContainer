@@ -20,7 +20,7 @@ on:
 env:
   MESSAGE: ${{ vars.message }}
   DATE: $(date +'%Y%m%d')
-  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}
+  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}:$(date +'%Y%m%d')
 
 jobs:
   
