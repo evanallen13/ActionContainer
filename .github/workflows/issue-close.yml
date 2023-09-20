@@ -33,6 +33,6 @@ jobs:
                 repo_owner="evanallen13"
                 repo_name="ActionContainer"
 
-                gh issue list --repo="$repo_owner/$repo_name" --state=open\ -l bug
+                gh issue list -R="$repo_owner/$repo_name" -s=open\ -l bug
 
 
