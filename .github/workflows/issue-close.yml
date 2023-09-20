@@ -26,5 +26,5 @@ jobs:
                 echo "================"
                 gh issue list --limit 1000 --state open --label bug --json number,title,url,labels > issues.json
                 cat issues.json
-            env:
-                GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
