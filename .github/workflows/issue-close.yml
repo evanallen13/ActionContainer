@@ -10,12 +10,19 @@ jobs:
         name: Close all issues labeled "bug"
         runs-on: ubuntu-latest
         steps:
-            - name: Find all bugs
-              id: bugs
-              uses: lee-dohm/select-matching-issues@v1
-              with:
-                query: 'label:bug'
-                token: ${{ secrets.PAT_TOKEN }}
+            # - name: Find all bugs
+            #   id: bugs
+            #   uses: lee-dohm/select-matching-issues@v1
+            #   with:
+            #     query: 'label:bug'
+            #     token: ${{ secrets.PAT_TOKEN }}
 
-            - name: Close found issues
-              run: cat ${{ steps.bugs.outputs.path }}
+            # - name: Close found issues
+            #   run: cat ${{ steps.bugs.outputs.path }}
+
+            - name: List all issues
+              run: |
+                echo "List all issues"
+                echo "================"
+                gh issue list --limit 1000 --state open --label bug --json number,title,url,labels > issues.json
+                cat issues.json
