@@ -4,6 +4,7 @@ on:
 
 env:
     GH_TOKEN: ${{ github.token }}
+    GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
 jobs:
     closeBugs:
@@ -23,8 +24,4 @@ jobs:
             - name: List all issues
               run: |
                 echo "List all issues"
-                echo "================"
-                gh issue list --limit 1000 --state open --label bug --json number,title,url,labels > issues.json
-                cat issues.json
-        env:
-            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+                gh issue list 
