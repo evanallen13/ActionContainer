@@ -4,7 +4,9 @@ on:
 
 env:
     GH_TOKEN: ${{ github.token }}
-    GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    OWNER: ${{ github.repository_owner }}
+    REPO: ${{ github.event.repository.name }}
 
 jobs:
     closeBugs:
@@ -21,7 +23,11 @@ jobs:
             # - name: Close found issues
             #   run: cat ${{ steps.bugs.outputs.path }}
 
-            - name: List all issues
-              run: |
-                echo "List all issues"
-                gh issue list 
+            # - name: List all issues
+            #   run: |
+            #     echo "List all issues"
+            #     gh issue list 
+
+            - run: |
+                echo $GITHUB_REPOSITORY
+
