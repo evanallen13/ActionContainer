@@ -18,4 +18,4 @@ jobs:
                 token: ${{ secrets.PAT_TOKEN }}
 
             - name: Close found issues
-              run: echo ${{ steps.bugs.outputs.path }}
+              run: cat ${{ steps.bugs.outputs.path }}
