@@ -28,10 +28,6 @@ jobs:
                 else
                     echo "IS_RELEASE=true" >> "$GITHUB_OUTPUT"
                 fi
-
-            - name: echo release
-              run: |
-                echo "Release: ${{ steps.set_release.outputs.IS_RELEASE }}"
     
     Build: 
         name: Build
@@ -43,5 +39,5 @@ jobs:
               uses: actions/checkout@v2
             - name: Build
               run: |
-                echo "Building"
+                echo ${{needs.FindOpenIssues.outputs.IS_RELEASE}}
 
