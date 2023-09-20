@@ -2,11 +2,10 @@
 
 repo_owner="evanallen13"
 repo_name="ActionContainer"
-
-response=$(gh issue list -R="$repo_owner/$repo_name" -s="open" -l=bug)
+response=$(gh issue list -R="$repo_owner/$repo_name" -s="open" -l=release)
 
 if echo "$response" | grep -q "no issues match your search"; then
-    echo "No ISSUES"
+    echo "IS_RELEASE=false" >> "$GITHUB_OUTPUT"
 else
-    echo $response
+    echo "IS_RELEASE=true" >> "$GITHUB_OUTPUT"
 fi
