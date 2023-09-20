@@ -27,7 +27,12 @@ jobs:
             #   run: |
             #     echo "List all issues"
             #     gh issue list 
+            
+            - name: Get Open Issues
+              run: |
+                repo_owner="evanallen13"
+                repo_name="ActionContainer"
 
-            - run: |
-                echo $GITHUB_REPOSITORY
+                gh issue list --repo="$repo_owner/$repo_name" --state=open\
+
 
