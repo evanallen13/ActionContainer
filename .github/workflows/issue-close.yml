@@ -25,14 +25,14 @@ jobs:
                 response=$(gh issue list -R="$repo_owner/$repo_name" -l=release)
                 
                 if [[ -z "$response" ]]; then
-                    echo "No response received. Check if there are release issues or if 'gh' is properly configured."
+                    echo "IS_RELEASE=false" >> "$GITHUB_OUTPUT"
                     exit 1
                 fi
                 
                 if echo "$response" | grep -q "no issues match your search"; then
-                    echo "IS_RELEASE=false"
+                    echo "IS_RELEASE=false" >> "$GITHUB_OUTPUT"
                 else
-                    echo "IS_RELEASE=true"
+                    echo "IS_RELEASE=true" >> "$GITHUB_OUTPUT"
                 fi
     
     Build: 
