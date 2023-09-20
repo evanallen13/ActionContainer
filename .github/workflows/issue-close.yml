@@ -26,7 +26,6 @@ jobs:
                 
                 if [[ -z "$response" ]]; then
                     echo "IS_RELEASE=false" >> "$GITHUB_OUTPUT"
-                    exit 1
                 fi
                 
                 if echo "$response" | grep -q "no issues match your search"; then
