@@ -23,6 +23,17 @@ env:
   DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-${{ github.ref_name }}
 
 jobs:
+
+  get-issue:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Echo Issues
+        uses: MandalAutomations/GetIssue@v1
+        with: 
+          Token: ${{ secrets.PAT_TOKEN }}
+          RepoName: "ActionContainer"
+          OwnerName: "evanallen13"
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
