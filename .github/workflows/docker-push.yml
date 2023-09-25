@@ -29,7 +29,7 @@ jobs:
     steps:
 
       - name: Echo Issues
-        uses: MandalAutomations/GetIssue@v3
+        uses: MandalAutomations/GetIssue@v4
         with: 
           Token: ${{ secrets.PAT_TOKEN }}
           RepoName: "ActionContainer"
