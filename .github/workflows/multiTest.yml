@@ -9,6 +9,7 @@ jobs:
         strategy:
             matrix:
               enviornments: ["main", "test", "uat"]
+              somthing: ["one", "two", "three"]
         steps:
             - name: Echo Hello
               run: echo "Hello Workd"
