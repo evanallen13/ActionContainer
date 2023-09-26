@@ -29,11 +29,12 @@ jobs:
     steps:
 
       - name: Echo Issues
-        uses: MandalAutomations/GetIssue@v5
+        uses: MandalAutomations/GetIssue@v6
         with: 
           Token: ${{ secrets.PAT_TOKEN }}
           RepoName: "ActionContainer"
           OwnerName: "evanallen13"
+          LabelName: "release"
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
