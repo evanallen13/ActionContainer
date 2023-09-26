@@ -2,11 +2,13 @@ name: "Multi-Test Deploy"
 on:
   workflow_dispatch:
 
-
 jobs:
 
     run:
-        runs-on: [ ubuntu-18.04, ubuntu-20.04 ]
+        runs-on: ubuntu-20.04
+        strategy:
+            matrix:
+              enviornments: ["main", "test", "uat"]
         steps:
             - name: Echo Hello
-              run: echo "Hello"
+              run: echo "Env ${{ matrix.enviornments }}"
