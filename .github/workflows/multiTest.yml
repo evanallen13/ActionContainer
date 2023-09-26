@@ -5,12 +5,14 @@ on:
 jobs:
 
     run:
-        runs-on: [ ubuntu-18.04, ubuntu-20.04 ]
+        runs-on: ubuntu-18.04
         strategy:
             matrix:
               enviornments: ["main", "test", "uat"]
         steps:
 
+            - name: checkout
+              uses: actions/checkout@v2
+
             - name: Increment Environment Variable
-              if: ${{ matrix.enviornments == 'main' }}
-              run: echo "This is main"
+              run: ./SayHello.sh ${{ matrix.enviornments}}
