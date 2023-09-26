@@ -11,4 +11,4 @@ jobs:
               enviornments: ["main", "test", "uat"]
         steps:
             - name: Echo Hello
-              run: echo "Env ${{ matrix.enviornments }}"
+              run: echo "Hello Workd"
