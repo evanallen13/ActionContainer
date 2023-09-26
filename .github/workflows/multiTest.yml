@@ -5,10 +5,10 @@ on:
 jobs:
 
     run:
-        runs-on: [ ]
+        runs-on: [ ubuntu-18.04, ubuntu-20.04 ]
         strategy:
             matrix:
-              enviornments: [ubuntu-18.04, ubuntu-20.04]
+              enviornments: ["main", "test", "uat"]
         steps:
 
             - name: Increment Environment Variable
