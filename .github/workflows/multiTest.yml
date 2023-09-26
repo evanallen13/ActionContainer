@@ -9,7 +9,8 @@ jobs:
         strategy:
             matrix:
               enviornments: ["main", "test", "uat"]
-              somthing: ["one", "two", "three"]
         steps:
-            - name: Echo Hello
-              run: echo "Hello Workd"
+
+            - name: Increment Environment Variable
+              if: ${{ matrix.enviornments == 'main' }}
+              run: echo "This is main"
