@@ -68,6 +68,7 @@ jobs:
         run: docker build -t helloworld .
 
       - name: Docker Tag and Push
+        id: docker_tag_and_push
         run: |
           docker tag helloworld ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
           docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}

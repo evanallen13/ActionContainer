@@ -1,16 +1,21 @@
-name: Test
-on: workflow_dispatch
+name: Automation Tests
+
+on:
+    workflow_dispatch:
+    schedule:
+    - cron: "*/15 * * * *"
+    - cron: "*/20 * * * *"
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set outputs
-        id: vars
-        shell: bash
-        run: echo "::set-output random-number=number::five"
 
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+    something:
+        runs-on: ubuntu-latest
+        steps:
+
+            - name: Run 15
+              if: github.event.schedule == '*/15 * * * *'
+              run: echo "15"
+
+            - name: Run 20
+              if: github.event.schedule == '*/20 * * * *'
+              run: echo "20"
