@@ -3,9 +3,8 @@ name: Automation Tests
 on:
     workflow_dispatch:
 
-    # schedule:
-    # - cron: "*/15 * * * *"
-    # - cron: "*/20 * * * *"
+    schedule:
+    - cron: "0 0 * * *"
 
 jobs:
 
@@ -21,6 +20,10 @@ jobs:
               if: github.event.schedule == '*/20 * * * *'
               run: echo "20"
 
+            # - name: None
+            #   if: github.event.schedule != '*/20 * * * *' || github.event.schedule != '*/15 * * * *'
+            #   run: echo "None"
+
             - name: None
-              if: github.event.schedule != '*/20 * * * *' || github.event.schedule != '*/15 * * * *'
+              if: github.event_name != 'schedule'
               run: echo "None"
