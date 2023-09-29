@@ -10,7 +10,7 @@ jobs:
       - name: Set outputs
         id: vars
         shell: bash
-        run: echo "::set-output name=random-number::five"
+        run: echo "::set-output random-number=number::five"
 
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash
