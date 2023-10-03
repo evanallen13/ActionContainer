@@ -3,26 +3,11 @@ name: Automation Tests
 on:
     workflow_dispatch:
 
-    schedule:
-    - cron: "0 0 * * *"
-
 jobs:
 
     something:
         runs-on: ubuntu-latest
         steps:
-
-            - name: Run 15
-              if: github.event.schedule == '*/15 * * * *'
-              run: echo "15"
-
-            - name: Run 20
-              if: github.event.schedule == '*/20 * * * *'
-              run: echo "20"
-
-            # - name: None
-            #   if: github.event.schedule != '*/20 * * * *' || github.event.schedule != '*/15 * * * *'
-            #   run: echo "None"
 
             - name: None
               if: github.event_name != 'schedule'
