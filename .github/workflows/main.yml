@@ -45,5 +45,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: "your-image-name:v1.0"
+          tags: ${{ steps.meta.outputs.tags }}-v1.5
           labels: ${{ steps.meta.outputs.labels }}
