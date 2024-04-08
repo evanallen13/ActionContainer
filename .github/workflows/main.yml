@@ -25,10 +25,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      - name: Increment Environment Variable
-        uses:  MandalAutomations/Increment-Environment-Variable@v1
+      - name: Update Environment Variable
+        uses: MandalAutomations/Update-Environment-Variable@v1
         with:
           Name: "MINOR"
+          Value: "10"
           EnvironmentName: ${{ github.ref_name }}
           RepoId: ${{ github.repository_id }}
           Token: ${{ secrets.GITHUB_TOKEN }}
