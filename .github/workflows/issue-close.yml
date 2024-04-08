@@ -1,0 +1,48 @@
+name: "Issue Close"
+on:
+  workflow_dispatch:
+
+env:
+    GH_TOKEN: ${{ github.token }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    OWNER: ${{ github.repository_owner }}
+    REPO: ${{ github.event.repository.name }}
+
+jobs:
+    FindOpenIssues:
+        runs-on: ubuntu-latest
+        outputs:
+            IS_RELEASE: ${{ steps.set_release.outputs.IS_RELEASE }}
+        steps: 
+            
+            - name: Get Open Issues
+              id: set_release
+              run: |
+                # repo_owner="evanallen13"
+                # repo_name="ActionContainer"
+                
+                # # response=$(gh issue list -R="$repo_owner/$repo_name" -l=release)
+                # response=$(gh issue list -R="$repo_owner/$repo_name" -l=release)
+                
+                # if [[ -z "$response" ]]; then
+                #     echo "IS_RELEASE=false" >> "$GITHUB_OUTPUT"
+                # fi
+                
+                # if echo "$response" | grep -q "no issues match your search"; then
+                #     echo "IS_RELEASE=false" >> "$GITHUB_OUTPUT"
+                # else
+                #     echo "IS_RELEASE=true" >> "$GITHUB_OUTPUT"
+                # fi
+    
+    Build: 
+        name: Build
+        runs-on: ubuntu-latest
+        needs: [ FindOpenIssues ]
+        if: needs.FindOpenIssues.outputs.IS_RELEASE == 'true'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Build
+              run: |
+                echo ${{needs.FindOpenIssues.outputs.IS_RELEASE}}
+
