@@ -20,9 +20,21 @@ on:
 env:
   MESSAGE: ${{ vars.message }}
   DATE: $(date +'%Y%m%d')
-  DOCKER_REPO: helloworld-${{ github.ref_name }}
+  DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/helloworld-$(date +'%Y%m%d')
 
 jobs:
+
+  get-issue:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Echo Issues
+        uses: MandalAutomations/GetIssue@v1
+        with: 
+          Token: ${{ secrets.PAT_TOKEN }}
+          RepoName: "ActionContainer"
+          OwnerName: "evanallen13"
+          LabelName: "release"
   
   set-tag:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
@@ -32,21 +44,12 @@ jobs:
       tag: ${{ steps.set_tag.outputs.TAG }}
     steps:
 
-      - name: echo ref
-        run: echo ${{ github.ref_name }}
-
       - name: Set Tag
         id: set_tag
-        run: |
-          echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
+        run: echo "TAG=${{ env.DATE }}-${{ vars.version }}" >> "$GITHUB_OUTPUT"
 
-      - name: Increment Environment Variable
-        uses: evanallen13/Increment-Environment-Variable@v1
-        with:
-          Name: "VERSION"
-          EnvironmentName: ${{ github.ref_name }}
-          RepoId: ${{ github.repository_id }}
-          Token: ${{ secrets.PAT_TOKEN }}
+      - name: Echo Name
+        run: echo ${{ github.actor }}
       
   build-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.BuildDocker == 'true'
@@ -58,22 +61,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      - name: Set up Docker Build
-        uses: docker/setup-buildx-action@v2
+      - name: Docker Login
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker Build and push
-        uses: docker/build-push-action@v4
+      - name: Docker Build
+        run: docker build -t helloworld .
+
+      - name: Docker Tag and Push
+        id: docker_tag_and_push
+        run: |
+          docker tag helloworld ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+          docker push ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+
+      - name: Increment Environment Variable
+        if: success()
+        uses: MandalAutomations/Increment-Environment-Variable@v1
         with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+          Name: "VERSION"
+          EnvironmentName: ${{ github.ref_name }}
+          RepoId: ${{ github.repository_id }}
+          Token: ${{ secrets.PAT_TOKEN }}
 
   run-docker:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.RunDocker == 'true' && github.event.inputs.BuildDocker == 'true'
@@ -82,11 +89,8 @@ jobs:
     needs: [ set-tag, build-docker ]
     steps:
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Docker Login
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Run Docker
-        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
+        run: docker run -e MY_VARIABLE="${{ env.MESSAGE }}" ${{ env.DOCKER_REPO }}:${{ needs.set-tag.outputs.tag }}
